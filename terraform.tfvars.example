@@ -1,0 +1,4 @@
+project_id = "gcp-project-id"
+region = "region"
+backend_image = "region-docker.pkg.dev/project/repo/backend:latest"
+frontend_image = "region-docker.pkg.dev/project/repo/frontend:latest"
