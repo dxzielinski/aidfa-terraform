@@ -24,8 +24,15 @@ jobs:
         run: |
           echo "credentials = \"${{ github.workspace }}/gcp_credentials.json\"" > terraform.tfvars
           echo "project_id = \"${{ secrets.GCP_PROJECT }}\"" >> terraform.tfvars
-          echo "backend_allowed_users = ${{ secrets.GCP_BACKEND_ALLOWED_USERS }}" >> terraform.tfvars
           echo "container_repo = \"${{ secrets.GCP_CONTAINER_REPO }}\"" >> terraform.tfvars
+
+          USERS=$(echo "${{ secrets.BACKEND_ALLOWED_USERS }}" | tr -d ' ')
+          IFS=',' read -r -a user_array <<< "$USERS"
+          printf "backend_allowed_users = [" >> terraform.tfvars
+          for user in "${user_array[@]}"; do
+            printf "\"%s\"," "$user" >> terraform.tfvars
+          done
+          sed -i 's/,$/]/' terraform.tfvars
 
       - name: Terraform Init
         run: terraform init
