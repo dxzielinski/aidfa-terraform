@@ -1,7 +1,7 @@
 resource "google_project_service" "enabled_services" {
-  project = var.project_id
+  project  = var.project_id
   for_each = toset(var.gcp_services)
-  service = each.value
+  service  = each.value
 }
 
 #############################
@@ -49,7 +49,7 @@ resource "google_cloud_run_service_iam_binding" "backend_invoker" {
   service  = google_cloud_run_service.backend_service.name
   location = google_cloud_run_service.backend_service.location
   role     = "roles/run.invoker"
-  members = var.backend_allowed_users
+  members  = var.backend_allowed_users
 }
 
 # Allow public (unauthenticated) access to frontend
