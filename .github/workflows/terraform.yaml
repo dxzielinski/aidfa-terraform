@@ -18,7 +18,7 @@ jobs:
           terraform_version: '1.11.3'
 
       - name: Write GCP Credentials File
-        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > ${{ github.workspace }}/gcp_credentials.json
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" | base64 -d > ${{ github.workspace }}/gcp_credentials.json
 
       - name: Create terraform.tfvars file
         run: |
