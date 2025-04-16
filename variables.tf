@@ -19,7 +19,8 @@ variable "gcp_services" {
   description = "List of GCP services to enable"
   type        = list(string)
   default     = ["artifactregistry.googleapis.com", "cloudbuild.googleapis.com", "run.googleapis.com",
-                 "iam.googleapis.com", "bigquery.googleapis.com", "firebase.googleapis.com"]
+                 "iam.googleapis.com", "bigquery.googleapis.com", "firebase.googleapis.com",
+                 "firestore.googleapis.com", "pubsub.googleapis.com"]
 }
 
 variable "container_repo" {
